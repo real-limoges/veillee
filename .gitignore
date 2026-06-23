@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Project — local-only docs (handoff notes, etc.; kept out of the repo)
+docs/
+
+# Xcode — user-specific
+xcuserdata/
+*.xcuserstate
+*.xcuserstatedata
+*.xcscmblueprint
+*.xccheckout
+
+# Xcode — build output
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode — shared scheme management is opt-in; ignore by default,
+# un-ignore a scheme by force-adding it if you want it tracked.
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Swift Package Manager (in case any local packages get added later)
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods / Carthage (not used today; here so stray files don't sneak in)
+Pods/
+Carthage/Build/
+
+# Provisioning / signing
+*.mobileprovision
+*.provisionprofile
+
+# Misc
+*.swp
+*~
