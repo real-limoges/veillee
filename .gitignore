@@ -29,6 +29,13 @@ DerivedData/
 *.xcodeproj/xcuserdata/
 *.xcworkspace/xcuserdata/
 
+# Emacs / sourcekit-lsp — bridges sourcekit-lsp to the .xcodeproj for editing in
+# Emacs. Generated per-machine by `xcode-build-server config` and points at this
+# machine's DerivedData index store, so it's local-only (regenerate, don't commit).
+buildServer.json
+.bsp/
+.compile
+
 # Swift Package Manager (in case any local packages get added later)
 .build/
 .swiftpm/
@@ -41,6 +48,10 @@ Carthage/Build/
 # Provisioning / signing
 *.mobileprovision
 *.provisionprofile
+
+# Playwright / browser screenshots — the MCP server writes these into the repo
+# (cwd) by default; corral them here and keep them local-only.
+screenshots/
 
 # Misc
 *.swp

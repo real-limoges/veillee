@@ -10,7 +10,7 @@ It's a single-window SwiftUI app. The model is a sealed, solved problem; the poi
 
 - **SwiftUI + SwiftData**, modern Swift concurrency (`async`/`await`, `AsyncStream`, `@Observable`)
 - **Foundation Models** as the inference backend (~3B on-device model, guided generation, tool calling)
-- **macOS 26** (developer beta) · Apple Silicon · built in Xcode
+- **macOS 26** (developer beta) · Apple Silicon · edited in Emacs · built & run in Xcode
 
 ## Architecture
 
@@ -24,6 +24,10 @@ Four layers, with care concentrated at the surface and the seam just below it:
 | Persistence | `Veillee/Persistence` | `Conversation` · `Message` (SwiftData `@Model`) |
 
 **The one rule:** keep the service seam thin. `ChatEngine` wraps `LanguageModelSession` and exposes nothing upward but a stream of tokens — no `FoundationModels` types leak into the views. That boundary is what lets the backend be swapped (e.g. mlx-swift) without touching the UI.
+
+## Workflow
+
+Editing happens in **Emacs** (`swift-mode` + eglot/`sourcekit-lsp`); **Xcode** is for building, running, debugging, and the one-time Foundation Models capability. Since this is an Xcode project, not SwiftPM, Emacs's LSP needs a `buildServer.json` — generate it once with [`xcode-build-server`](https://github.com/SolaWing/xcode-build-server) (`xcode-build-server config -project veillee.xcodeproj -scheme veillee`) and regenerate when targets or files change.
 
 ## Build order
 
