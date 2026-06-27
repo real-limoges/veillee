@@ -9,7 +9,7 @@ It's a single-window SwiftUI app. The model is a sealed, solved problem; the poi
 ## Stack
 
 - **SwiftUI + SwiftData**, modern Swift concurrency (`async`/`await`, `AsyncStream`, `@Observable`)
-- **Foundation Models** as the inference backend (~3B on-device model, guided generation, tool calling)
+- **Foundation Models** as the inference backend (~3B on-device model, guided generation)
 - **macOS 26** (developer beta) · Apple Silicon · edited in Emacs · built & run in Xcode
 
 ## Architecture
@@ -19,8 +19,8 @@ Four layers, with care concentrated at the surface and the seam just below it:
 | Layer | Folder | Role |
 |-------|--------|------|
 | Surface (SwiftUI) | `Veillee/Surface` | `ConversationListView` · `ChatView` · `ComposerView` · `InspectorView` |
-| Service seam | `Veillee/Service` | `ChatBackend` (protocol) · `ChatEngine` · `ToolRegistry` · `PromptStore` |
-| Foundation Models | — | sealed, Apple's: streaming, `@Generable` output, tool calling |
+| Service seam | `Veillee/Service` | `ChatBackend` (protocol) · `ChatEngine` · `PromptStore` |
+| Foundation Models | — | sealed, Apple's: streaming, guided generation |
 | Persistence | `Veillee/Persistence` | `Conversation` · `Message` (SwiftData `@Model`) |
 
 **The one rule:** keep the service seam thin. `ChatEngine` wraps `LanguageModelSession` and exposes nothing upward but a stream of tokens — no `FoundationModels` types leak into the views. That boundary is what lets the backend be swapped (e.g. mlx-swift) without touching the UI.
@@ -35,4 +35,3 @@ Editing happens in **Emacs** (`swift-mode` + eglot/`sourcekit-lsp`); **Xcode** i
 2. Single conversation, in memory — get the core loop's feel right.
 3. Add SwiftData — conversation list, hydrate transcript on open.
 4. Design pass — typography, motion, density, spacing.
-5. Optional — `@Generable` tools rendered as native UI.
